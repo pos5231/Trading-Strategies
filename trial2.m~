@@ -1,10 +1,10 @@
-clc
+
 lb=[];
-ub= [];
+ub=[];
 Aeq = ones(1,12);
 Beq = 1;
 
-a0=1/12*ones(1,12);
+w0=1/1000*rand(1,12);
 
 options = optimoptions(@fmincon,'Display','off');
 
@@ -13,8 +13,10 @@ for i = 3
     weightfun=@(a) w2(a,   avrcc, avrco, avroc, avroo, avrrvp,...
         avrtvl, rcc, rco, roc, roo, tvl, rvp, i, n);
     
-    [a_opt,f] = fmincon(@(a) msharper(a, mu,Q,rf,weightfun),a0,[],[],Aeq,Beq,[],[]);
-       
+    [a_opt,f] = fmincon(@(a) msharper(a, mu,Q,rf,weightfun),w0,[],[],[],[],@confuneq(),options);
+    
+  
+    
     weight_opt = w2(a_opt,   avrcc, avrco, avroc, avroo, avrrvp,...
         avrtvl, rcc, rco, roc, roo, tvl, rvp, i, n);
     

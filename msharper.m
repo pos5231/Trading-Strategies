@@ -1,3 +1,8 @@
 function [y] = msharper(a, mu,Q,rf,weightfun)
-y = (mu'*weightfun(a)-rf)%./sqrt(weightfun(a)'*Q*weightfun(a));
+size(a);
+size(mu);
+size(Q);
+size(weightfun(a));
+g = weightfun(a);
+y = (mu*g'-rf)./sqrt(g*Q*g');
 end

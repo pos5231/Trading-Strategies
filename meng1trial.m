@@ -11,10 +11,6 @@ format long g
 %masterdata = xlsread('in_sample_data.xlsx');
 %save masterdata.mat
 
-%% Global Variables
-
-global mu Q avrcc avrco avroc avroo avrrvp avrtvl rcc rco roc roo tvl rvp i j n
-
 %% Importing Data From Matrix (Save time)
 % Saving the improted
 tic
@@ -99,7 +95,7 @@ W = zeros(t,n);
 for i = 3:t
         
     for j = 1:n
-        lcon = @(a) wconstraint(a, avrcc, avrco, avroc, avroo, avrrvp, avrtvl,rcc,rco,roc,roo, tvl, rvp, i, j, n)
+        lcon = @(a) wconstraint(a, avrcc, avrco, avroc, avroo, avrrvp, avrtvl,rcc,rco,roc,roo, tvl, rvp, i, j, n);
     end % setting up the linear constraint
     
     [x,f] = fmincon(fun,w0,[],[],Amat,Bmat,lb,ub,lcon,options) %solving for max-sharpe ratio
