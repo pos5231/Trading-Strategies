@@ -1,8 +1,4 @@
 function [y] = msharper(a, mu,Q,rf,weightfun)
-size(a);
-size(mu);
-size(Q);
-size(weightfun(a));
 g = weightfun(a);
-y = (mu*g'-rf)./sqrt(g*Q*g');
+y = (mu*g'-rf)./sqrt(g*Q*g'); % scalar valur for objective function
 end
